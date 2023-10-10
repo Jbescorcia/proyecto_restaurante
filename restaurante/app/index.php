@@ -27,13 +27,10 @@ include 'pedido_cliente.php';
 
         <div class="row justify-content-end">
             <div class="col-auto">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#organizar" class="btn-primary btn"><i class="fa-solid fa-arrow-down-wide-short"></i> NO Implementado</a>
 
                 <a href="#" data-bs-toggle="modal" data-bs-target="#numevoPedido" class="btn-primary btn"><i class="fa-solid fa-cart-plus"></i> Nuevo Pedido</a>
 
-                <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#mostraPedido" name="pedido"><i class="fa-solid fa-cart-plus"></i> Pedidos</button>
-
-                <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#pedido_cliente" name="pedido"><i class="fa-solid fa-cart-plus"></i> Pedidos Cliente</button>
+                <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#pedido_cliente" name="pedido"><i class="fa-solid fa-cart-plus"></i> Pedidos Por Cliente</button>
             </div>
         </div>
 
@@ -65,9 +62,6 @@ include 'pedido_cliente.php';
                             <form method="post" action="">
                                 <input type="hidden" value=<?php echo $key ?> name="key">
                                 <button class="btn btn-danger " type="submit" name="eliminar">Eliminar</button>
-                            </form>
-                            <form action="orden.php" method="post">
-                                <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#pedido" name="pedido">Pedido</button>
                             </form>
                         </td>
                     </tr>

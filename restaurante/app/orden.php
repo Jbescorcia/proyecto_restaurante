@@ -1,6 +1,4 @@
     <?php
-    session_start();
-
     $clientes = $_SESSION['clientes'];
 
     function calcularCostoTotal($pedido)

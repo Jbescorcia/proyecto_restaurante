@@ -1,5 +1,4 @@
 <?php
-session_start();
 $clientes = $_SESSION['clientes'];
 
 ?>
@@ -16,36 +15,15 @@ $clientes = $_SESSION['clientes'];
 
                 <?php
 
-                $clientesAgrupados = array();
-
-                foreach ($_SESSION['clientes'] as $cliente) {
-                    $cedula = $cliente['cedula'];
-
-                    if (isset($clientesAgrupados[$cedula])) {
-                        $clientesAgrupados[$cedula][] = $cliente;
-                    } else {
-                        $clientesAgrupados[$cedula] = array($cliente);
-                    }
-                }
-
-                echo '<table>';
-                echo '<thead><tr><th>Cédula</th><th>       </th><th>Descripcion</th></tr></thead>';
-                echo '<tbody>';
-
-                foreach ($clientesAgrupados as $cedula => $clientes) {
-                    foreach ($clientes as $cliente) {
-                        echo '<tr>';
-                        echo '<td>' . $cedula . '</td>';
-                        echo '<td>' . $cliente['nombre'] . '</td>';
-                        echo '<td>' . $cliente['pedido'] . '</td>';
-                        echo '</tr>';
-                    }
-                }
-
-                echo '</tbody>';
-                echo '</table>';
+                foreach ($_SESSION['clientes'] as $key => $cliente) {
                 ?>
-
+                    <tr>
+                        <td><?php echo $cliente['cedula'] ?></td>
+                        <td><?php echo $cliente['pedido'] ?></td>
+                    </tr>
+                <?php
+                }
+                ?>
 
 
                 <div class="modal-footer">

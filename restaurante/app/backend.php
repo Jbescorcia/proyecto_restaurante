@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $ruta_imagen = "../img/";
 
