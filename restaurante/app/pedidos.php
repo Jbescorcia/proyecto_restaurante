@@ -1,50 +1,68 @@
 <?php
-$clientes = $_SESSION['clientes'];
+session_start();
+
+include 'orden.php';
+
 ?>
 
-<div class="modal fade" id="mostraPedido" tabindex="-1" aria-labelledby="mostraPedidoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-shop"></i> Pedidos </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-sm table table-striped table-hover mt-4">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Cédula</th>
-                            <th>Pedido</th>
-                            <th>Foto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $ruta_imagen = "../img/";
-                        
-                        foreach ($_SESSION['clientes'] as $key => $cliente) {
-                            $id = $cliente['id'];
-                            $cedula = $cliente['cedula'];
-                            $pedido = $cliente['pedido'];
-                            $imagen = $cliente['foto'];
-                        ?>
-                            <tr>
-                                <td><?php echo $id ?></td>
-                                <td><?php echo $cedula ?></td>
-                                <td><?php echo $pedido ?></td>
-                                <td><img src=" <?php echo $ruta_imagen . $cedula . ".jpg"; ?>" width="60" height="70"></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+<!DOCTYPE html>
+<html lang="es">
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-regular fa-square-minus"></i> Entendido</button>
-                </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <link rel="shortcut icon" href="../assets/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/all.min.css">
+</head>
+
+<body>
+    <div class="container py-3">
+        <table class="table table-sm table table-striped table-hover mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cédula</th>
+                    <th>Pedido</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $ruta_imagen = "../img/";
+                $cedulaCliente = $_SESSION['cedula'];
+                foreach ($_SESSION['clientes'] as $key => $cliente) {
+                    if ($cliente['cedula'] === $cedulaCliente) {
+                        $id = $cliente['id'];
+                        $cedula = $cliente['cedula'];
+                        $pedido = $cliente['pedido'];
+                        $imagen = $cliente['foto'];
+                    ?>
+                        <tr>
+                            <td><?php echo $id ?></td>
+                            <td><?php echo $cedula ?></td>
+                            <td><?php echo $pedido ?></td>
+                            <td><img src=" <?php echo $ruta_imagen . $cedula . ".jpg"; ?>" width="60" height="70"></td>
+                        </tr>
+                    <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+        <form action="post">
+            <?php
+            echo var_dump($cedulaCliente);
+
+            ?>
+            <button type="button" class="btn btn-primary"><i class="fa-solid fa-cart-plus"></i> Comprar</button>
+        </form>
+        <div class="modal-footer">
+            <a href="./index.php?accion=0" class="btn-danger btn"><i class="far fa-times-circle"></i> Salir</a>
         </div>
     </div>
-</div>
+</body>
+
+</html>

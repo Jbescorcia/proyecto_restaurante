@@ -18,7 +18,6 @@ if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
         echo "<script> alert('Error.\\nNo es un archivo JPEG o PNG valido.');window.location='index.php'</script>";
     }
 }
-
 $fileimg = opendir($ruta_imagen);
 
 
@@ -56,4 +55,11 @@ if ($_POST) {
             unset($_SESSION['clientes'][$key]);
         }
     } 
+}
+
+if($_GET){
+    $estado = $_GET['accion'];
+    if($estado == 0){
+        $_SESSION['cedula'] = "";
+    }
 }

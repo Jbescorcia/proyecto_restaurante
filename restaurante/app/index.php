@@ -1,11 +1,10 @@
 <?php
 session_start();
 include 'compra.php';
-include 'pedidos.php';
-include 'orden.php';
 include 'backend.php';
-include 'pedido_cliente.php';
 
+
+$clientes = $_SESSION['clientes'];
 ?>
 
 <!DOCTYPE html>
@@ -27,10 +26,7 @@ include 'pedido_cliente.php';
 
         <div class="row justify-content-end">
             <div class="col-auto">
-
                 <a href="#" data-bs-toggle="modal" data-bs-target="#numevoPedido" class="btn-primary btn"><i class="fa-solid fa-cart-plus"></i> Nuevo Pedido</a>
-
-                <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#pedido_cliente" name="pedido"><i class="fa-solid fa-cart-plus"></i> Pedidos Por Cliente</button>
             </div>
         </div>
 
@@ -49,10 +45,15 @@ include 'pedido_cliente.php';
                 <?php
 
 
+
                 foreach ($_SESSION['clientes'] as $key => $cliente) {
                 ?>
                     <tr>
-                        <td><?php echo $cliente['id'] ?></td>
+                        <td>
+                            <?php echo $cliente['id'];
+                            $_SESSION['cedula'] = $cliente['cedula'];
+                            ?>
+                        </td>
                         <td><?php echo $cliente['cedula'] ?></td>
                         <td><?php echo $cliente['pedido'] ?></td>
                         <td>
@@ -61,12 +62,14 @@ include 'pedido_cliente.php';
                         <td>
                             <form method="post" action="">
                                 <input type="hidden" value=<?php echo $key ?> name="key">
-                                <button class="btn btn-danger " type="submit" name="eliminar">Eliminar</button>
+                                <button class="btn btn-danger " type="submit" name="eliminar"><i class="fa-solid fa fa-trash"></i> Eliminar</button>
                             </form>
+                            <a href="./pedidos.php" class="btn btn-primary " type="submit" name="comprar"><i class="fa-solid fa-cart-plus"></i> Comprar</a>
                         </td>
                     </tr>
                 <?php
                 }
+
                 ?>
             </tbody>
 
